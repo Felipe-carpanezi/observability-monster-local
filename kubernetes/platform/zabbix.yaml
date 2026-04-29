@@ -16,7 +16,7 @@ spec:
           dbType: postgresql
           env:
             - name: DB_SERVER_HOST
-              value: "monster-db.endpoint.aws.com"
+              value: "postgres.database.svc.cluster.local"
             - name: POSTGRES_DB
               value: "zabbix"
             - name: POSTGRES_USER
@@ -26,7 +26,6 @@ spec:
         zabbixWeb:
           ingress:
             enabled: true
-            annotations:
-              kubernetes.io/ingress.class: nginx
+            ingressClassName: nginx
             hosts:
-              - host: zabbix.SUBDOMINIO.sslip.io
+              - host: zabbix.127.0.0.1.sslip.io
