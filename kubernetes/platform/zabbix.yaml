@@ -7,8 +7,8 @@ spec:
   project: default
   source:
     chart: zabbix
-    repoURL: https://zabbix-community.github.io/helm-zabbix
-    targetRevision: 4.4.11
+    repoURL: https://zabbix.github.io/zabbix-kubernetes-helm
+    targetRevision: 1.3.4 # <--- ESSA É A VERSÃO DO INSTALADOR (CHART)
     helm:
       values: |
         zabbixServer:
@@ -28,7 +28,7 @@ spec:
             ingressClassName: nginx
             hosts:
               - host: zabbix.127.0.0.1.sslip.io
-  destination: # <--- O BLOCO QUE ESTAVA FALTANDO
+  destination:
     server: https://kubernetes.default.svc
     namespace: zabbix
   syncPolicy:
