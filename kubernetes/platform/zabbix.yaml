@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     chart: zabbix
-    repoURL: https://zabbix.github.io/zabbix-kubernetes-helm/ # <--- BARRA FINAL É VITAL
+    repoURL: https://zabbix-community.github.io/helm-zabbix # <--- URL DA COMUNIDADE (ESTÁVEL)
     targetRevision: 1.3.4
     helm:
       values: |
@@ -37,4 +37,3 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true
