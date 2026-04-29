@@ -6,24 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: n8n
-    repoURL: https://vshn.github.io/charts # <--- REPO MAIS ESTÁVEL
-    targetRevision: 0.1.3
-    helm:
-      values: |
-        config:
-          database:
-            type: postgresdb
-            postgresdb:
-              host: "postgres.database.svc.cluster.local"
-              database: n8n
-              user: postgres
-              password: "MonsterPassword2026"
-        ingress:
-          enabled: true
-          ingressClassName: nginx
-          hosts:
-            - host: n8n.127.0.0.1.sslip.io
+    repoURL: git@github.com:Felipe-carpanezi/observability-monster-local.git
+    targetRevision: main
+    path: kubernetes/apps/manifests # O Argo vai ler o arquivo que você criou acima
   destination:
     server: https://kubernetes.default.svc
     namespace: n8n
@@ -31,5 +16,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
