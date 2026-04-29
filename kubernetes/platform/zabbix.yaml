@@ -1,4 +1,3 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -29,3 +28,12 @@ spec:
             ingressClassName: nginx
             hosts:
               - host: zabbix.127.0.0.1.sslip.io
+  destination: # <--- ADICIONADO: ONDE O APP VAI MORAR
+    server: https://kubernetes.default.svc
+    namespace: zabbix
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
