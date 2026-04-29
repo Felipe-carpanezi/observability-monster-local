@@ -27,7 +27,7 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
-  destination: # <--- ADICIONADO: ONDE O APP VAI MORAR
+  destination:
     server: https://kubernetes.default.svc
     namespace: n8n
   syncPolicy:
