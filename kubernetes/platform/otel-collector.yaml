@@ -11,6 +11,8 @@ spec:
     targetRevision: 0.91.0
     helm:
       values: |
+        image:
+          repository: "otel/opentelemetry-collector-contrib" # <--- CORREÇÃO OBRIGATÓRIA
         mode: deployment
         config:
           receivers:
@@ -20,8 +22,6 @@ spec:
                   endpoint: 0.0.0.0:4317
                 http:
                   endpoint: 0.0.0.0:4318
-          processors:
-            batch: {}
           exporters:
             logging:
               loglevel: debug
@@ -29,11 +29,9 @@ spec:
             pipelines:
               traces:
                 receivers: [otlp]
-                processors: [batch]
                 exporters: [logging]
               metrics:
                 receivers: [otlp]
-                processors: [batch]
                 exporters: [logging]
   destination:
     server: https://kubernetes.default.svc
@@ -44,4 +42,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true # <--- ADICIONADO PARA EVITAR STATUS UNKNOWN
+      - ServerSideApply=true
