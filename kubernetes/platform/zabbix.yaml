@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: zabbix-helm-chrt
-    repoURL: https://zabbix.github.io/zabbix-kubernetes-helm
-    targetRevision: 1.3.4
+    chart: zabbix
+    repoURL: https://zabbix-community.github.io/helm-zabbix
+    targetRevision: 4.4.11
     helm:
       values: |
         zabbixServer:
@@ -17,3 +17,24 @@ spec:
             - name: DB_SERVER_HOST
               value: "postgres.database.svc.cluster.local"
             - name: POSTGRES_DB
+              value: "zabbix"
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "MonsterPassword2026"
+        zabbixWeb:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            hosts:
+              - host: zabbix.127.0.0.1.sslip.io
+  destination: # <--- O BLOCO QUE ESTAVA FALTANDO
+    server: https://kubernetes.default.svc
+    namespace: zabbix
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

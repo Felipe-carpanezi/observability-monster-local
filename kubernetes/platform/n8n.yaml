@@ -27,7 +27,7 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
-  destination:
+  destination: # <--- O BLOCO QUE ESTAVA FALTANDO
     server: https://kubernetes.default.svc
     namespace: n8n
   syncPolicy:
