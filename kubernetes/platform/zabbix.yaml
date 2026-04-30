@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    chart: zabbix # Nome simples
-    repoURL: https://zabbix.github.io/zabbix-kubernetes-helm/ # URL Oficial com barra
+    chart: zabbix
+    repoURL: https://zabbix.github.io/zabbix-kubernetes-helm/ # <--- COM BARRA NO FINAL
     targetRevision: 1.3.4
     helm:
       values: |
