@@ -6,10 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    # USANDO O REPOSITÓRIO DA COMUNIDADE (O mais compatível com K3d)
-    chart: zabbix 
+    chart: zabbix
     repoURL: https://zabbix-community.github.io/helm-zabbix
-    targetRevision: 4.4.11 # Versão estável do chart
+    targetRevision: 4.4.11 # <--- VERSÃO CORRETA PARA ESTE REPOSITÓRIO
     helm:
       values: |
         zabbixServer:
