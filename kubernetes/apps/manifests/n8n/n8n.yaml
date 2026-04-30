@@ -34,8 +34,12 @@ spec:
           value: postgres
         - name: DB_POSTGRESDB_PASSWORD
           value: MonsterPassword2026
-        - name: N8N_SECURE_COOKIE # <--- ISSO RESOLVE O ERRO DE PÁGINA
+        - name: N8N_SECURE_COOKIE
           value: "false"
+        - name: N8N_PROTOCOL
+          value: "http"
+        - name: WEBHOOK_URL
+          value: "http://n8n.127.0.0.1.sslip.io/"
 ---
 apiVersion: v1
 kind: Service
