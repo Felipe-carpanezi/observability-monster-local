@@ -6,9 +6,10 @@ metadata:
 spec:
   project: default
   source:
-    chart: zabbix
-    repoURL: https://zabbix.github.io/zabbix-kubernetes-helm/ # <--- COM BARRA NO FINAL
-    targetRevision: 1.3.4
+    # USANDO O REPOSITÓRIO DA COMUNIDADE (O mais compatível com K3d)
+    chart: zabbix 
+    repoURL: https://zabbix-community.github.io/helm-zabbix
+    targetRevision: 4.4.11 # Versão estável do chart
     helm:
       values: |
         zabbixServer:
