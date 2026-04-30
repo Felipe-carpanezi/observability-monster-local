@@ -34,6 +34,8 @@ spec:
           value: postgres
         - name: DB_POSTGRESDB_PASSWORD
           value: MonsterPassword2026
+        - name: N8N_SECURE_COOKIE # <--- ISSO RESOLVE O ERRO DE PÁGINA
+          value: "false"
 ---
 apiVersion: v1
 kind: Service
@@ -53,7 +55,7 @@ metadata:
   name: n8n-ingress
   namespace: n8n
 spec:
-  ingressClassName: nginx # <--- GARANTIDO
+  ingressClassName: nginx
   rules:
   - host: n8n.127.0.0.1.sslip.io
     http:
