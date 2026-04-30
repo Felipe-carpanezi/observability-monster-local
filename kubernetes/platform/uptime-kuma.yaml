@@ -6,21 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: uptime-kuma
-    repoURL: https://dirsigler.github.io/uptime-kuma-helm
-    targetRevision: 2.14.0
-    helm:
-      values: |
-        persistence:
-          enabled: false
-        ingress:
-          enabled: true
-          ingressClassName: nginx
-          hosts:
-            - host: uptime.127.0.0.1.sslip.io
-              paths:
-                - path: /
-                  pathType: Prefix
+    repoURL: git@github.com:Felipe-carpanezi/observability-monster-local.git
+    targetRevision: main
+    path: kubernetes/apps/manifests/uptime-kuma # <--- APONTA PARA A SUBPASTA
   destination:
     server: https://kubernetes.default.svc
     namespace: uptime-kuma

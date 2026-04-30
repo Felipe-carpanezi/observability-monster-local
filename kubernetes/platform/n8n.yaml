@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: git@github.com:Felipe-carpanezi/observability-monster-local.git
     targetRevision: main
-    path: kubernetes/apps/manifests # O Argo vai ler o arquivo que você criou acima
+    path: kubernetes/apps/manifests/n8n
   destination:
     server: https://kubernetes.default.svc
     namespace: n8n
@@ -16,3 +16,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

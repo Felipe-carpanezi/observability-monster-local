@@ -53,7 +53,7 @@ metadata:
   name: n8n-ingress
   namespace: n8n
 spec:
-  ingressClassName: nginx
+  ingressClassName: nginx # <--- GARANTIDO
   rules:
   - host: n8n.127.0.0.1.sslip.io
     http:
