@@ -7,8 +7,8 @@ spec:
   project: default
   source:
     chart: zabbix
-    repoURL: https://zabbix.github.io/zabbix-kubernetes-helm/
-    targetRevision: 1.3.4 # Versão oficial correta
+    repoURL: https://zabbix-community.github.io/helm-zabbix
+    targetRevision: 4.4.11 # <--- VERSÃO CERTA PARA ESTE REPO
     helm:
       values: |
         zabbixServer:
