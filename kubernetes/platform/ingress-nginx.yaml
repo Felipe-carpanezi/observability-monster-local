@@ -9,6 +9,11 @@ spec:
     chart: ingress-nginx
     repoURL: https://kubernetes.github.io/ingress-nginx
     targetRevision: 4.10.0
+    helm:
+      values: |
+        controller:
+          admissionWebhooks:
+            enabled: false # <--- ISSO VAI DESTRAVAR SEU CLUSTER
   destination:
     server: https://kubernetes.default.svc
     namespace: ingress-nginx

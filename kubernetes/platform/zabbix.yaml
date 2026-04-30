@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    chart: zabbix
-    repoURL: https://zabbix-community.github.io/helm-zabbix # <--- URL DA COMUNIDADE (ESTÁVEL)
+    chart: zabbix # Nome simples
+    repoURL: https://zabbix.github.io/zabbix-kubernetes-helm/ # URL Oficial com barra
     targetRevision: 1.3.4
     helm:
       values: |
@@ -37,3 +37,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
