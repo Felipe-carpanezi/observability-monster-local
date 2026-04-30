@@ -1,40 +1,69 @@
 {
-  "name": "AIOps Self-Healing with Groq",
+  "name": "AIOps - The Monster Final",
   "nodes": [
     {
-      "parameters": { "path": "zabbix-ai-trigger" },
-      "name": "Zabbix Alerta",
-      "type": "n8n-nodes-base.webhook"
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "zabbix-ai-trigger",
+        "options": {}
+      },
+      "id": "webhook-node",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
     },
     {
       "parameters": {
         "model": "llama-3.3-70b-versatile",
-        "options": { "temperature": 0.3 }
-      },
-      "name": "Groq AI Brain",
-      "type": "@n8n/n8n-nodes-langchain.lmChatGroq"
-    },
-    {
-      "parameters": {
-        "text": "=Analise o erro do sistema: {{ $node[\"Zabbix Alerta\"].json[\"error_msg\"] }}. O que devo fazer?",
         "options": {
-          "systemMessage": "Você é um assistente SRE. Analise erros e decida entre escalar o serviço ou avisar o desenvolvedor."
+          "temperature": 0.3
         }
       },
-      "name": "AI Agent",
-      "type": "@n8n/n8n-nodes-langchain.agent"
+      "id": "groq-model-node",
+      "name": "Groq Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [450, 500],
+      "credentials": {
+        "groqApi": {
+          "id": "COLE_AQUI_O_ID_DA_SUA_CREDENCIAL"
+        }
+      }
     },
     {
       "parameters": {
-        "message": "=🤖 *IA SRE Monster*\nDecisão: {{ $node[\"AI Agent\"].json[\"output\"] }}\nStatus: Processando correção..."
+        "options": {
+          "systemMessage": "Você é um Engenheiro SRE Sênior. Analise o erro recebido e sugira uma solução direta. Se for falta de recurso, sugira escala. Se for erro de código, sugira log check."
+        }
       },
-      "name": "WhatsApp Final",
-      "type": "n8n-nodes-base.whatsApp"
+      "id": "ai-agent-node",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.6,
+      "position": [550, 300]
     }
   ],
   "connections": {
-    "Zabbix Alerta": { "main": [ [ { "node": "AI Agent", "index": 0 } ] ] },
-    "Groq AI Brain": { "ai_language_model": [ [ { "node": "AI Agent", "index": 0 } ] ] },
-    "AI Agent": { "main": [ [ { "node": "WhatsApp Final", "index": 0 } ] ] }
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_language_model": [
+        [
+          {
+            "node": "AI Agent",
+            "index": 0
+          }
+        ]
+      ]
+    }
   }
 }
