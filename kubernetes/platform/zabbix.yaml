@@ -6,28 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: zabbix
-    repoURL: https://zabbix-community.github.io/helm-zabbix
-    targetRevision: 4.4.11 # <--- VERSÃO CERTA PARA ESTE REPO
-    helm:
-      values: |
-        zabbixServer:
-          dbType: postgresql
-          env:
-            - name: DB_SERVER_HOST
-              value: "postgres.database.svc.cluster.local"
-            - name: POSTGRES_DB
-              value: "zabbix"
-            - name: POSTGRES_USER
-              value: "postgres"
-            - name: POSTGRES_PASSWORD
-              value: "MonsterPassword2026"
-        zabbixWeb:
-          ingress:
-            enabled: true
-            ingressClassName: nginx
-            hosts:
-              - host: zabbix.127.0.0.1.sslip.io
+    repoURL: git@github.com:Felipe-carpanezi/observability-monster-local.git
+    targetRevision: main
+    path: kubernetes/apps/manifests # O Argo vai ler o arquivo zabbix.yaml que você criou
   destination:
     server: https://kubernetes.default.svc
     namespace: zabbix
@@ -35,6 +16,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true
