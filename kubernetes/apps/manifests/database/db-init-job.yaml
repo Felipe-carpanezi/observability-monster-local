@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-init
+  namespace: database
+spec:
+  template:
+    spec:
+      containers:
+      - name: db-init
+        image: postgres:16
+        command:
+        - /bin/sh
+        - -c
+        - |
+          psql -h postgres -U postgres -d postgres -c "CREATE DATABASE zabbix;" || true;
+          psql -h postgres -U postgres -d postgres -c "CREATE DATABASE n8n;" || true;
+        env:
+        - name: PGPASSWORD
+          value: "MonsterPassword2026"
+      restartPolicy: OnFailure
