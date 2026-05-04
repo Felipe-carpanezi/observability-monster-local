@@ -12,17 +12,26 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: n8n-app # Mudei aqui
+      app: n8n-app
   template:
     metadata:
       labels:
-        app: n8n-app # Mudei aqui
+        app: n8n-app
     spec:
       containers:
       - name: n8n
         image: n8nio/n8n:latest
+        ports:
+        - containerPort: 5678
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
         env:
-        - name: N8N_PORT # <--- ADICIONE ISSO PARA FORÇAR A PORTA
+        - name: N8N_PORT
           value: "5678"
         - name: DB_TYPE
           value: postgresdb
@@ -36,11 +45,15 @@ spec:
           value: MonsterPassword2026
         - name: N8N_SECURE_COOKIE
           value: "false"
+        - name: N8N_PROTOCOL
+          value: "http"
+        - name: WEBHOOK_URL
+          value: "http://n8n.127.0.0.1.sslip.io/"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: n8n-service # Mudei o nome para não dar conflito com a variável N8N_PORT
+  name: n8n-service
   namespace: n8n
 spec:
   ports:
@@ -64,6 +77,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: n8n-service # Nome atualizado
+            name: n8n-service
             port:
               number: 80
