@@ -7,7 +7,7 @@
         "path": "zabbix-ai-trigger",
         "options": {}
       },
-      "id": "webhook-node",
+      "id": "webhook-1",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
@@ -20,16 +20,11 @@
           "temperature": 0.3
         }
       },
-      "id": "groq-model-node",
+      "id": "groq-1",
       "name": "Groq Chat Model",
       "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
       "typeVersion": 1,
-      "position": [450, 500],
-      "credentials": {
-        "groqApi": {
-          "id": "COLE_AQUI_O_ID_DA_SUA_CREDENCIAL"
-        }
-      }
+      "position": [450, 500]
     },
     {
       "parameters": {
@@ -37,11 +32,11 @@
           "systemMessage": "Você é um Engenheiro SRE Sênior. Analise o erro recebido e sugira uma solução direta. Se for falta de recurso, sugira escala. Se for erro de código, sugira log check."
         }
       },
-      "id": "ai-agent-node",
+      "id": "agent-1",
       "name": "AI Agent",
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.6,
-      "position": [550, 300]
+      "position": [600, 300]
     }
   ],
   "connections": {
